@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <stdlib.h>
 #include <time.h>
@@ -29,19 +29,26 @@ void Construct(Matrix& matrix, size_t n, size_t m) {
         }
     }
 }
+void Destruct(Matrix& mx) {
+  for (size_t i = 0; i < mx.str; ++i) {
+        delete mx.mp[i];
+                                       }
+     }
 void add(Matrix& mx, Matrix& mx1) {
-    Matrix mx2;
-    Construct(mx2, mx.str, mx.sto);
-    for (int i = 0; i < mx.str; ++i) {
-        for (int j = 0; j < mx.sto; ++j) {
-            mx2.mp[i][j] = mx.mp[i][j] + mx1.mp[i][j];
+    if ((mx.str == mx1.str) && (mx.sto == mx1.sto)) {
+        Matrix mx2;
+        Construct(mx2, mx.str, mx.sto);
+        for (int i = 0; i < mx.str; ++i) {
+            for (int j = 0; j < mx.sto; ++j) {
+                mx2.mp[i][j] = mx.mp[i][j] + mx1.mp[i][j];
+            }
         }
-    }
-    for (int i = 0; i < mx.str; ++i) {
-        for (int j = 0; j < mx.sto; ++j) {
-            cout << mx2.mp[i][j] << " ";
+        for (int i = 0; i < mx.str; ++i) {
+            for (int j = 0; j < mx.sto; ++j) {
+                cout << mx2.mp[i][j] << " ";
+            }
+            cout << endl;
         }
-        cout << endl;
     }
 }
 void copy(Matrix& mx) {
@@ -56,38 +63,40 @@ void copy(Matrix& mx) {
         }
 }
 void sub(Matrix& mx, Matrix& mx1) {
-    Matrix mx2;
-    Construct(mx2, mx.str, mx.sto);
-    for (int i = 0; i < mx.str; ++i) {
-        for (int j = 0; j < mx.sto; ++j) {
-            mx2.mp[i][j] = mx.mp[i][j] - mx1.mp[i][j];
+    if ((mx.str == mx1.str) && (mx.sto == mx1.sto)) {
+        Matrix mx2;
+        Construct(mx2, mx.str, mx.sto);
+        for (int i = 0; i < mx.str; ++i) {
+            for (int j = 0; j < mx.sto; ++j) {
+                mx2.mp[i][j] = mx.mp[i][j] - mx1.mp[i][j];
+            }
         }
-    }
-    for (int i = 0; i < mx.str; ++i) {
-        for (int j = 0; j < mx.sto; ++j) {
-            cout << mx2.mp[i][j] << " ";
+        for (int i = 0; i < mx.str; ++i) {
+            for (int j = 0; j < mx.sto; ++j) {
+                cout << mx2.mp[i][j] << " ";
+            }
+            cout << endl;
         }
-        cout << endl;
     }
 }
 void mult(Matrix& mx, Matrix& mx1){
-    Matrix mx2;
-    Construct(mx2, mx.str, mx.sto);
-    for (int i = 0; i < mx.str; ++i) {
-        for (int j = 0; j < mx.sto; ++j) {
-            for (int k = 0; k < mx2.str; ++k) {
-                mx2.mp[i][j] += mx.mp[i][k] * mx1.mp[k][j];
+    if ((mx.str == mx1.str) && (mx.sto == mx1.sto)) {
+        Matrix mx2;
+        Construct(mx2, mx.str, mx.sto);
+        for (int i = 0; i < mx.str; ++i) {
+            for (int j = 0; j < mx.sto; ++j) {
+                for (int k = 0; k < mx2.str; ++k) {
+                    mx2.mp[i][j] += mx.mp[i][k] * mx1.mp[k][j];
+                }
             }
         }
-    }
-    for (int i = 0; i < mx.str; ++i) {
-        for (int j = 0; j < mx.sto; ++j) {
-            cout << mx2.mp[i][j] << " ";
+        for (int i = 0; i < mx.str; ++i) {
+            for (int j = 0; j < mx.sto; ++j) {
+                cout << mx2.mp[i][j] << " ";
+            }
+            cout << endl;
         }
-        cout << endl;
     }
-
-
 }
 void trans(Matrix& mx) {
     Matrix mx2;
@@ -103,15 +112,12 @@ void trans(Matrix& mx) {
         }
         cout << endl;
     }
-
-
 }
-
-
-
 int main() {
-    size_t n = 3;
-    size_t m = 3;
+    int n, m;
+    cin >> n >> m;
+    cout << n << " Strok" << endl;
+    cout << m << " Stolbov" << endl;
     Matrix t;
     Construct(t, n, m);
     for (int i = 0; i < n; ++i) {
